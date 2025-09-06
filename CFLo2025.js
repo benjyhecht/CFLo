@@ -97,7 +97,6 @@ const k = 25;
 const HFA = 25;
 const latestRatings = new Map();
 const teamLogos = new Map();
-const latestWeek = 13;
 
 let allResults = [];
 let allRatings = [];
@@ -221,6 +220,8 @@ function LoadResults() {
     allResults.push(new Result(2025, 13, TEAMS.Toronto, 35, TEAMS.Hamilton, 33));
     allResults.push(new Result(2025, 13, TEAMS.Edmonton, 7, TEAMS.Calgary, 28));
 
+    const latestWeek = Math.max(...allResults.map(r => r.week));
+    
     for (w = 1; w <= latestWeek; w++) {
         for (let i = 0; i < allResults.length; i++) {
             if (allResults[i].week == w) {
@@ -230,6 +231,7 @@ function LoadResults() {
         CreateWeeklyRatings(w);
     }
 
+    document.querySelector('#currentRankingsContainer h2').textContent = `Current Weekly Rankings (Week ${latestWeek})`;
 }
 
 function CreateWeeklyRatings(weekToRate) {
