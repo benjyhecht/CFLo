@@ -1,3 +1,82 @@
+// Minimal Chart.js example
+function renderRatingsChart() {
+    // Extract week labels
+    const weekLabels = allRatings.map(weekArr => `Week ${weekArr[0].week}`);
+
+    // Get all team names
+    const teams = Object.keys(TEAMS);
+
+    // Build datasets: one per team
+    const dashedTeams = ['Winnipeg', 'Montreal', 'Hamilton'];
+    const datasets = teams.map(team => {
+        return {
+            label: team,
+            data: allRatings.map(weekArr => {
+                // Find this team's rating for the week
+                const found = weekArr.find(r => r.team === team);
+                return found ? found.rating : null;
+            }),
+            borderColor: randomColor(team),
+            fill: false,
+            borderDash: dashedTeams.includes(team) ? [8, 4] : undefined
+        };
+    });
+
+    const ctx = document.getElementById('ratingsChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: weekLabels,
+            datasets: datasets
+        },
+        options: {
+            responsive: true,
+            layout: {
+                padding: {
+                    right: 200 // Adjust as needed for label space
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    align: 'right',
+                    anchor: 'end',
+                    display: function(context) {
+                        // Only show label for last data point
+                        return context.dataIndex === context.dataset.data.length - 1;
+                    },
+                    formatter: function(value, context) {
+                        // Show team name and current Elo
+                        return context.dataset.label + ' ' + value;
+                    },
+                    font: {
+                        weight: 'bold',
+                        size: 14
+                    },
+                    color: function(context) {
+                        // Use team color for label
+                        return randomColor(context.dataset.label);
+                    },
+                    // Offset labels up/down to reduce overlap
+                    offset: function(context) {
+                        // Alternate up/down by Elo rank (higher Elo = up, lower = down)
+                        const datasets = context.chart.data.datasets;
+                        // Get Elo for each team at last week
+                        const lastWeekIndex = context.dataset.data.length - 1;
+                        const elos = datasets.map(ds => ds.data[lastWeekIndex]);
+                        // Sort descending
+                        const sorted = [...elos].sort((a, b) => b - a);
+                        const myElo = context.dataset.data[lastWeekIndex];
+                        const rank = sorted.indexOf(myElo);
+                        // Alternate: even ranks up, odd ranks down
+                        return (rank % 2 === 0) ? 32 : -32;
+                    }
+                }
+            }
+        },
+        plugins: [ChartDataLabels]
+    });
+}
 /*  Variables   */
 const TEAMS = {
     BC: "BC",
@@ -186,6 +265,7 @@ window.onload = (event) => {
     LoadResults();
     renderCurrentRankingsTable();
     renderAllWeeksTable();
+    renderRatingsChart();
 }
 
 // Renders the current weekly rankings table (latest week, sorted)
