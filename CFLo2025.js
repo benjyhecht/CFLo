@@ -33,50 +33,54 @@ function renderRatingsChart() {
             responsive: true,
             layout: {
                 padding: {
-                    right: 200 // Adjust as needed for label space
+                    right: 180 // Adjust as needed for label space
                 }
             },
             plugins: {
                 legend: { display: false },
                 datalabels: {
-                    align: 'right',
-                    anchor: 'end',
-                    display: function(context) {
-                        // Only show label for last data point
-                        return context.dataIndex === context.dataset.data.length - 1;
-                    },
-                    formatter: function(value, context) {
-                        // Show team name and current Elo
-                        return context.dataset.label + ' ' + value;
-                    },
-                    font: {
-                        weight: 'bold',
-                        size: 14
-                    },
-                    color: function(context) {
-                        // Use team color for label
-                        return randomColor(context.dataset.label);
-                    },
-                    // Offset labels up/down to reduce overlap
-                    offset: function(context) {
-                        // Alternate up/down by Elo rank (higher Elo = up, lower = down)
-                        const datasets = context.chart.data.datasets;
-                        // Get Elo for each team at last week
-                        const lastWeekIndex = context.dataset.data.length - 1;
-                        const elos = datasets.map(ds => ds.data[lastWeekIndex]);
-                        // Sort descending
-                        const sorted = [...elos].sort((a, b) => b - a);
-                        const myElo = context.dataset.data[lastWeekIndex];
-                        const rank = sorted.indexOf(myElo);
-                        // Alternate: even ranks up, odd ranks down
-                        return (rank % 2 === 0) ? 32 : -32;
-                    }
+                    display: false // disables all default datalabels
                 }
             }
         },
-        plugins: [ChartDataLabels]
+        plugins: [ChartDataLabels, customLabelPlugin]
     });
 }
+
+const customLabelPlugin = {
+    id: 'customLabelPlugin',
+    afterDraw: function (chart) {
+        const ctx = chart.ctx;
+        const datasets = chart.data.datasets;
+        const lastIndex = chart.data.labels.length - 1;
+        // Collect y positions and Elo for sorting
+        const labelPositions = datasets.map((dataset, i) => {
+            const meta = chart.getDatasetMeta(i);
+            const point = meta.data[lastIndex];
+            return {
+                team: dataset.label,
+                elo: dataset.data[lastIndex],
+                x: point.x,
+                y: point.y,
+                color: dataset.borderColor
+            };
+        });
+        // Sort by Elo descending (or y ascending)
+        labelPositions.sort((a, b) => b.elo - a.elo);
+        // Draw labels, alternating above/below
+        labelPositions.forEach((pos, idx) => {
+            const labelYOffset = (idx % 2 === 0) ? -4 : 4; // alternate up/down
+            ctx.save();
+            ctx.font = 'bold 14px sans-serif';
+            ctx.fillStyle = pos.color;
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(`${pos.team} ${pos.elo}`, pos.x + 20, pos.y + labelYOffset);
+            ctx.restore();
+        });
+    }
+};
+
 /*  Variables   */
 const TEAMS = {
     BC: "BC",
