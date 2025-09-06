@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CFL Elo Rankings</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script type="text/javascript" src="CFLo2025.js"></script>
+    <style>
+        #allWeeksTable td, #allWeeksTable th {
+            white-space: nowrap;
+        }
+        #allWeeksTable {
+            min-width: 1200px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>CFL Elo Rankings</h1>
+
+    <!-- Current Weekly Rankings Table -->
+    <div id="currentRankingsContainer">
+        <h2>Current Weekly Rankings</h2>
+        <table id="currentRankingsTable" border="1" style="border-collapse:collapse;">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Team</th>
+                    <th>Elo</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+
+    <div style="width: 90vw; max-width: 900px;">
+        <canvas id="ratingsChart"></canvas>
+    </div>
+
+    <!-- All Weeks Table -->
+    <div id="allWeeksContainer" style="margin-top:2em;">
+        <h2>Weekly Elo Rankings (All Weeks)</h2>
+        <div style="overflow-x:auto; width:90vw; max-width:900px;">
+            <table id="allWeeksTable" border="1" style="border-collapse:collapse; min-width:1200px; width:100%;">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
