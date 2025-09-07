@@ -53,29 +53,40 @@ const customLabelPlugin = {
         const ctx = chart.ctx;
         const datasets = chart.data.datasets;
         const lastIndex = chart.data.labels.length - 1;
-        // Collect y positions and Elo for sorting
-        const labelPositions = datasets.map((dataset, i) => {
+
+        // Step 1: Collect label info
+        let labels = datasets.map((dataset, i) => {
             const meta = chart.getDatasetMeta(i);
             const point = meta.data[lastIndex];
             return {
                 team: dataset.label,
                 elo: dataset.data[lastIndex],
-                x: point.x,
+                x: point.x + 15, // offset to the right
                 y: point.y,
-                color: dataset.borderColor
+                color: dataset.borderColor,
+                text: `${dataset.label} ${dataset.data[lastIndex]}`
             };
         });
-        // Sort by Elo descending (or y ascending)
-        labelPositions.sort((a, b) => b.elo - a.elo);
-        // Draw labels, alternating above/below
-        labelPositions.forEach((pos, idx) => {
-            const labelYOffset = (idx % 2 === 0) ? -4 : 4; // alternate up/down
+
+        // Step 2: Sort by y
+        labels.sort((a, b) => a.y - b.y);
+
+        // Step 3: Adjust to avoid overlap
+        const minSpacing = 16; // minimum vertical space between labels
+        for (let i = 1; i < labels.length; i++) {
+            if (labels[i].y - labels[i - 1].y < minSpacing) {
+                labels[i].y = labels[i - 1].y + minSpacing;
+            }
+        }
+
+        // Step 4: Draw labels
+        labels.forEach(label => {
             ctx.save();
             ctx.font = 'bold 14px sans-serif';
-            ctx.fillStyle = pos.color;
+            ctx.fillStyle = label.color;
             ctx.textAlign = 'left';
             ctx.textBaseline = 'middle';
-            ctx.fillText(`${pos.team} ${pos.elo}`, pos.x + 20, pos.y + labelYOffset);
+            ctx.fillText(label.text, label.x, label.y);
             ctx.restore();
         });
     }
@@ -226,7 +237,7 @@ function LoadResults() {
     allResults.push(new Result(2025, 14, TEAMS.Calgary, 19, TEAMS.Edmonton, 31));
 
     const latestWeek = Math.max(...allResults.map(r => r.week));
-    
+
     for (w = 1; w <= latestWeek; w++) {
         for (let i = 0; i < allResults.length; i++) {
             if (allResults[i].week == w) {
