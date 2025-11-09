@@ -272,6 +272,9 @@ function LoadResults() {
 
     allResults.push(new Result(2025, 22, TEAMS.Winnipeg, 33, TEAMS.Montreal, 42));
     allResults.push(new Result(2025, 22, TEAMS.Calgary, 30, TEAMS.BC, 33));
+
+    allResults.push(new Result(2025, 23, TEAMS.Montreal, 19, TEAMS.Hamilton, 16));
+    allResults.push(new Result(2025, 23, TEAMS.BC, 21, TEAMS.Saskatchewan, 24));
     
     const latestWeek = Math.max(...allResults.map(r => r.week));
 
