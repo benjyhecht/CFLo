@@ -275,6 +275,8 @@ function LoadResults() {
 
     allResults.push(new Result(2025, 23, TEAMS.Montreal, 19, TEAMS.Hamilton, 16));
     allResults.push(new Result(2025, 23, TEAMS.BC, 21, TEAMS.Saskatchewan, 24));
+
+    allResults.push(new Result(2025, 24, TEAMS.Saskatchewan, 25, TEAMS.Montreal, 17));
     
     const latestWeek = Math.max(...allResults.map(r => r.week));
 
@@ -304,6 +306,10 @@ function CalculateRatings(result) {
     let homeOriginalRating = latestRatings.get(result.homeTeam);
     let awayDiff = homeOriginalRating - awayOriginalRating + HFA;
     let homeDiff = awayOriginalRating - homeOriginalRating - HFA;
+    if (result.week == 24) {
+        awayDiff = homeOriginalRating - awayOriginalRating;
+        homeDiff = awayOriginalRating - homeOriginalRating;
+    }
     let awayEP = 1 / (Math.pow(10, (awayDiff) / 400) + 1);
     let homeEp = 1 / (Math.pow(10, (homeDiff) / 400) + 1);
     let kmod = k * Math.log(Math.abs(result.homeScore - result.awayScore) + 1);
