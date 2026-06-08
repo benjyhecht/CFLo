@@ -169,6 +169,9 @@ function randomColor(team) {
 function LoadResults() {
     allResults = [];
     // 2026 starts as a clean slate with all teams at 1500 and no games loaded yet.
+    allResults.push(new Result(2026, 1, TEAMS.Montreal, 30, TEAMS.Hamilton, 27));
+    allResults.push(new Result(2026, 1, TEAMS.Winnipeg, 30, TEAMS.Calgary, 28));
+    allResults.push(new Result(2026, 1, TEAMS.Edmonton, 29, TEAMS.Ottawa, 21));
 }
 
 function CreateWeeklyRatings(weekToRate) {
