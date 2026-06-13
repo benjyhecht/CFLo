@@ -169,6 +169,58 @@ function randomColor(team) {
 function LoadResults() {
     allResults = [];
 
+    allResults.push(new Result(2024, 1, TEAMS.Montreal, 27, TEAMS.Winnipeg, 12));
+    allResults.push(new Result(2024, 1, TEAMS.Hamilton, 24, TEAMS.Calgary, 32));
+    allResults.push(new Result(2024, 1, TEAMS.Saskatchewan, 29, TEAMS.Edmonton, 21));
+    allResults.push(new Result(2024, 1, TEAMS.BC, 27, TEAMS.Toronto, 35));
+
+    allResults.push(new Result(2024, 2, TEAMS.Winnipeg, 19, TEAMS.Ottawa, 23));
+    allResults.push(new Result(2024, 2, TEAMS.Montreal, 23, TEAMS.Edmonton, 20));
+    allResults.push(new Result(2024, 2, TEAMS.Calgary, 17, TEAMS.BC, 26));
+    allResults.push(new Result(2024, 2, TEAMS.Saskatchewan, 33, TEAMS.Hamilton, 30));
+
+    allResults.push(new Result(2024, 3, TEAMS.Ottawa, 21, TEAMS.Montreal, 47));
+    allResults.push(new Result(2024, 3, TEAMS.BC, 26, TEAMS.Winnipeg, 24));
+    allResults.push(new Result(2024, 3, TEAMS.Edmonton, 36, TEAMS.Toronto, 39));
+    allResults.push(new Result(2024, 3, TEAMS.Hamilton, 20, TEAMS.Saskatchewan, 36));
+
+    allResults.push(new Result(2024, 4, TEAMS.Edmonton, 21, TEAMS.BC, 24));
+    allResults.push(new Result(2024, 4, TEAMS.Montreal, 30, TEAMS.Toronto, 20));
+    allResults.push(new Result(2024, 4, TEAMS.Winnipeg, 19, TEAMS.Calgary, 22));
+    allResults.push(new Result(2024, 4, TEAMS.Hamilton, 22, TEAMS.Ottawa, 24));
+
+    allResults.push(new Result(2024, 5, TEAMS.Toronto, 23, TEAMS.Saskatchewan, 30));
+    allResults.push(new Result(2024, 5, TEAMS.Ottawa, 16, TEAMS.Winnipeg, 25));
+    allResults.push(new Result(2024, 5, TEAMS.Calgary, 26, TEAMS.Montreal, 30));
+    allResults.push(new Result(2024, 5, TEAMS.BC, 44, TEAMS.Hamilton, 28));
+
+    allResults.push(new Result(2024, 6, TEAMS.Toronto, 37, TEAMS.Montreal, 18));
+    allResults.push(new Result(2024, 6, TEAMS.Calgary, 37, TEAMS.Winnipeg, 41));
+    allResults.push(new Result(2024, 6, TEAMS.Saskatchewan, 20, TEAMS.BC, 35));
+    allResults.push(new Result(2024, 6, TEAMS.Ottawa, 37, TEAMS.Edmonton, 34));
+
+    allResults.push(new Result(2024, 7, TEAMS.Edmonton, 14, TEAMS.Ottawa, 20));
+    allResults.push(new Result(2024, 7, TEAMS.Winnipeg, 9, TEAMS.Saskatchewan, 19));
+    allResults.push(new Result(2024, 7, TEAMS.Toronto, 24, TEAMS.Hamilton, 27));
+    allResults.push(new Result(2024, 7, TEAMS.BC, 24, TEAMS.Calgary, 25));
+
+    allResults.push(new Result(2024, 8, TEAMS.Saskatchewan, 16, TEAMS.Montreal, 20));
+    allResults.push(new Result(2024, 8, TEAMS.Calgary, 6, TEAMS.Ottawa, 33));
+    allResults.push(new Result(2024, 8, TEAMS.Winnipeg, 14, TEAMS.Toronto, 16));
+    allResults.push(new Result(2024, 8, TEAMS.Hamilton, 44, TEAMS.Edmonton, 28));
+
+    allResults.push(new Result(2024, 9, TEAMS.BC, 0, TEAMS.Winnipeg, 25));
+    allResults.push(new Result(2024, 9, TEAMS.Montreal, 33, TEAMS.Hamilton, 16));
+    allResults.push(new Result(2024, 9, TEAMS.Edmonton, 42, TEAMS.Saskatchewan, 31));
+    allResults.push(new Result(2024, 9, TEAMS.Toronto, 23, TEAMS.Calgary, 27));
+
+    allResults.push(new Result(2024, 10, TEAMS.Saskatchewan, 22, TEAMS.Ottawa, 22));
+    allResults.push(new Result(2024, 10, TEAMS.Calgary, 25, TEAMS.Toronto, 39));
+    allResults.push(new Result(2024, 10, TEAMS.Hamilton, 23, TEAMS.Montreal, 33));
+    allResults.push(new Result(2024, 10, TEAMS.BC, 16, TEAMS.Edmonton, 33));
+
+    
+
     const latestWeek = Math.max(...allResults.map(r => r.week));
 
     for (let w = 1; w <= latestWeek; w++) {
