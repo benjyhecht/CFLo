@@ -219,6 +219,11 @@ function LoadResults() {
     allResults.push(new Result(2024, 10, TEAMS.Hamilton, 23, TEAMS.Montreal, 33));
     allResults.push(new Result(2024, 10, TEAMS.BC, 16, TEAMS.Edmonton, 33));
 
+    allResults.push(new Result(2024, 11, TEAMS.Ottawa, 31, TEAMS.Calgary, 29));
+    allResults.push(new Result(2024, 11, TEAMS.Montreal, 27, TEAMS.Saskatchewan, 24));
+    allResults.push(new Result(2024, 11, TEAMS.Edmonton, 47, TEAMS.Hamilton, 22));
+    allResults.push(new Result(2024, 11, TEAMS.Winnipeg, 20, TEAMS.BC, 11));
+
     
 
     const latestWeek = Math.max(...allResults.map(r => r.week));
