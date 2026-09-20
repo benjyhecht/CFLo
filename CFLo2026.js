@@ -240,6 +240,10 @@ function LoadResults() {
     allResults.push(new Result(2026, 15, TEAMS.Saskatchewan, 6, TEAMS.Winnipeg, 19));
     allResults.push(new Result(2026, 15, TEAMS.Calgary, 16, TEAMS.Edmonton, 53));
     allResults.push(new Result(2026, 15, TEAMS.Montreal, 29, TEAMS.BC, 48));
+
+    allResults.push(new Result(2026, 16, TEAMS.Montreal, 37, TEAMS.Hamilton, 25));
+    allResults.push(new Result(2026, 16, TEAMS.Edmonton, 19, TEAMS.Toronto, 24));
+    allResults.push(new Result(2026, 16, TEAMS.Ottawa, 38, TEAMS.Calgary, 40));
     
     
 
