@@ -259,6 +259,11 @@ function LoadResults() {
     allResults.push(new Result(2026, 19, TEAMS.Ottawa, 20, TEAMS.BC, 41));
     allResults.push(new Result(2026, 19, TEAMS.Calgary, 28, TEAMS.Winnipeg, 33));
     allResults.push(new Result(2026, 19, TEAMS.Saskatchewan, 24, TEAMS.Montreal, 44));
+
+    allResults.push(new Result(2026, 20, TEAMS.Toronto, 39, TEAMS.Ottawa, 40));
+    allResults.push(new Result(2026, 20, TEAMS.Winnipeg, 27, TEAMS.Edmonton, 35));
+    allResults.push(new Result(2026, 20, TEAMS.Montreal, 12, TEAMS.Saskatchewan, 16));
+    allResults.push(new Result(2026, 20, TEAMS.BC, 13, TEAMS.Calgary, 32));
     
     
 
