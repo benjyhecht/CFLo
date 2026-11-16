@@ -275,6 +275,8 @@ function LoadResults() {
 
     allResults.push(new Result(2026, 23, TEAMS.Winnipeg, 23, TEAMS.Montreal, 33));
     allResults.push(new Result(2026, 23, TEAMS.BC, 16, TEAMS.Edmonton, 28));
+
+    allResults.push(new Result(2026, 24, TEAMS.Montreal, 30, TEAMS.Edmonton, 37));
     
     
 
